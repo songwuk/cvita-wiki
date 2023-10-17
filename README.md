@@ -1,4 +1,4 @@
-# icon 
+# ![image](./public/resume-large.svg)
 
 # [中文文档](./README-zh.md)
 ## cv online [https://cvita.wiki]
