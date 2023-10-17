@@ -1,36 +1,24 @@
 ---
 // Component Imports
-import Counter from '../components/Counter';
+import BaseHead from '../components/base/BaseHead.astro'
+import LogoLine from '../components/base/LogoLine.astro'
+import Main from '../components/Main'
 const someProps = {
-	count: 0,
-};
-
+	count: 0
+}
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
-
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
+		<BaseHead description='cv' title='resume'></BaseHead>
 	</head>
 	<body>
+		<LogoLine></LogoLine>
 		<main>
-			<Counter {...someProps} client:visible>
-				<h1>Hello, React!</h1>
-			</Counter>
+			<Main {...someProps} client:visible>
+				<h1>Hello, everyone!</h1>
+			</Main>
 		</main>
 	</body>
 </html>
