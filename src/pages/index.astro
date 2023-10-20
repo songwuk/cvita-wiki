@@ -2,10 +2,8 @@
 // Component Imports
 import BaseHead from '../components/base/BaseHead.astro'
 import LogoLine from '../components/base/LogoLine.astro'
+import Body from '../components/base/Body.astro'
 import Main from '../components/Main'
-const someProps = {
-	count: 0
-}
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
@@ -13,12 +11,10 @@ const someProps = {
 	<head>
 		<BaseHead description='cv' title='resume'></BaseHead>
 	</head>
-	<body>
+	<Body>
 		<LogoLine></LogoLine>
 		<main>
-			<Main {...someProps} client:visible>
-				<h1>Hello, everyone!</h1>
-			</Main>
+			<Main client:only="react"></Main>
 		</main>
-	</body>
+	</Body>
 </html>
