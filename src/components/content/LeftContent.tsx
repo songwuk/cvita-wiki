@@ -1,37 +1,57 @@
 import { useState, useRef, useEffect } from 'react'
+import type { resumeType } from '@/type'
 import './LeftContent.css'
 /**
  * 空格 文字 特殊符号
  * @returns 
  */
 export default function LeftContent(
-  PageSize: {
-    pageX: number,
-    pageY: number
-  }
-){
+{
+  PageSize,
+  GetContent
+}: {PageSize: {pageX: number,pageY: number}, GetContent: (ev: resumeType) => void}){
   const inputedRef = useRef<HTMLTextAreaElement>(null)
   const [TextareaStyle, setTextareaStyle] = useState({
     left: '-100px',
     top: '-100px',
   })
+  const [postContent, setPostContent] = useState('');
+
   const addContext = (value: string) => {
     const textSpan = document.createElement('span')
+    textSpan?.classList.add('next-span')
     textSpan.innerHTML = value
+    return textSpan
+  }
+  /**
+   * 判断当前是否是有效的长句
+   */
+  const isLongSatement = () => {
+
   }
   const onChangeTextBlock = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const isLong = isLongSatement()
     const target = ev.target
-    addContext(target.value)
+    const textSpan = addContext(target.value)
+    // inputedRef.current?.appendChild(textSpan)
     console.log(target.value)
+    GetContent({content: target.value})
+  }
+  const handleMoveTextBlock = (isArrow: string | null) => {
+    console.log(isArrow, 'isArrow')
   }
   useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
       // 在这里处理键盘事件的逻辑
+      let arrowHead = null
       if(event.key === 'ArrowUp'){
-        console.log('up')
+        arrowHead = 'up'
       }else if(event.key === 'ArrowDown'){
-        console.log('down')
+        arrowHead = 'down'
+      } else if(event.key === 'Enter') {
+        arrowHead = 'enter'
       }
+      handleMoveTextBlock(arrowHead)
     };
     document.addEventListener('keyup', handleKeyUp);
     return () => {
@@ -83,7 +103,7 @@ export default function LeftContent(
     inputedRef.current?.focus() // focus
     children[index]?.classList.add('view-line-hover')
   }
-  const itemsList = ['# 1.More Time', '## 2.你需要非常多时间', 'String3text', 'String4bigworld', 'String5'];
+  const itemsList = ['# 1.More Time', '## 2.更多时间', '### 3.没有时间'];
   return (
 		<>
 			<div className="border w-full border-black dark:border-white relative h-[909px]">
@@ -100,7 +120,7 @@ export default function LeftContent(
             })
           }
         </div>
-        <textarea autoFocus ref={inputedRef} onChange={ev => onChangeTextBlock(ev)} className={` outline-none dark:bg-gray-400 resize-none w-[1px] h-[var(--set-base-height)] absolute left-0 top-0`} style={TextareaStyle} />
+        <textarea value={postContent}  autoFocus ref={inputedRef} onChange={ev => onChangeTextBlock(ev)} className={` outline-none dark:bg-gray-400 resize-none w-[1px] h-[var(--set-base-height)] absolute left-0 top-0`} style={TextareaStyle} />
       </div>
 		</>
 	);

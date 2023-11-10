@@ -1,8 +1,11 @@
 ---
-import './LogoLine.css'
+import '@/styles/global.css'
+import ThemeIcon from './ThemeIcon';
 ---
-<div class="py-3 w-full text-left border border-black mt-[2px] dark:border-white">
+<div class="py-3 w-full text-left border border-black mt-[2px] dark:border-white flex justify-between items-center">
   <a href="/" class="w-[110px] h-[30px] ml-3 md:cursor-pointer line-high overflow-hidden text-center flex justify-center align-center relative">
     <img class="svg-wave" src="./resume-large.svg" alt="">
   </a>
+  <ThemeIcon client:only="react"></ThemeIcon>
 </div>
+

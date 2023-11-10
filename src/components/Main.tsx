@@ -1,6 +1,7 @@
 import { useState, useRef} from 'react';
 import LeftContent from '../components/content/LeftContent.tsx'
-// import RightContent from '../components/content/RightContent.tsx'
+import RightContent from '../components/content/RightContent.tsx'
+import type { resumeType } from '@/type'
 
 import './Mian.css';
 export default function Main() {
@@ -18,10 +19,13 @@ export default function Main() {
 			pageY: (pageY- top),
 		})
 	}
+	const onGetContent = (ex: resumeType) => {
+		console.log(ex.content, 'eeee')
+	}
 	return (
-		<div ref={viewRef} className='flex mt-1 justify-left items-center' onClickCapture={ ev => onMouseMoveMain(ev)}>
-			<LeftContent {...PageSize}/>
-			{/* <RightContent /> */}
+		<div ref={viewRef} className='font-MPLUSRounded1c flex mt-1 justify-center flex-col items-start md:flex-row' onClickCapture={ ev => onMouseMoveMain(ev)}>
+			<LeftContent PageSize={PageSize} GetContent={(ev) => onGetContent(ev)}/>
+			<RightContent />
 		</div>
 	)
 }

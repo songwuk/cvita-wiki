@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&family=Special+Elite&display=swap');
 /* The integration's default injected base.css file */
+/* 128 128 128 gray */
+/* 255 255 255 white */
 :root {
 	--set-base-height: 20px;
 	--set-base-front: 13px;
-	--set-base-weight: 'normal'
+  --set-base-tar-bar: 20px;
+	--set-base-weight: 'normal';
+  --set-base-dark-background-color: 24 61 61;
+  --set-base-dark-color: 255 255 255;
+  --set-base-light-background-color: 150 182 197;
+  --set-base-light-color: 0 0 0;
 }
 body {
 	font-family: -apple-system, BlinkMacSystemFont,'Segoe UI', Helvetica, Arial, sans-serif,'Apple Color Emoji', 'Segoe UI Emoji','Segoe UI Symbol';
@@ -11,8 +18,27 @@ body {
 	text-rendering: optimizeLegibility;
 	overflow-wrap: break-word;
 }
-.dark {
-	background-color: black;
-	color: white;
+.line-high::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: -50px;
+  top: 45px;
+  width: 100px;
+  height: 1px;
+  background: white;
+  transform: rotate(-135deg);
+  animation: waveMove 1s 3;
+  box-shadow: 30px -1px 3px yellow; /* 添加阴影效果 */
 }
-
+@keyframes waveMove {
+  from {
+    left: -50px;
+    top: 45px;
+  }
+  to   { 
+    left: 70px;
+    top: 25px;
+  }
+}
+svg { cursor: pointer; } /* whole rectangle */
