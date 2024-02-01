@@ -23,7 +23,7 @@ export default function Main() {
 		console.log(ex.content, 'eeee')
 	}
 	return (
-		<div ref={viewRef} className='font-MPLUSRounded1c flex mt-1 justify-center flex-col items-start md:flex-row' onClickCapture={ ev => onMouseMoveMain(ev)}>
+		<div ref={viewRef} className='font-MPLUSRounded1c flex justify-center flex-col items-start md:flex-row' onClickCapture={ ev => onMouseMoveMain(ev)}>
 			<LeftContent PageSize={PageSize} GetContent={(ev) => onGetContent(ev)}/>
 			<RightContent />
 		</div>

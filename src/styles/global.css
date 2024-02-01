@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&family=Special+Elite&display=swap');
 /* The integration's default injected base.css file */
-/* 128 128 128 gray */
-/* 255 255 255 white */
 :root {
 	--set-base-height: 20px;
 	--set-base-front: 13px;
@@ -42,3 +40,25 @@ body {
   }
 }
 svg { cursor: pointer; } /* whole rectangle */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2147483646;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 2147483646;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
+}

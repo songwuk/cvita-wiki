@@ -3,8 +3,8 @@ export default function TabBar() {
   return (
     <div className="flex font-MPLUSRounded1c">
       {
-        ResumeList.map(item=> {
-          return <div className="mx-1">{item}</div>
+        ResumeList.map((item,index)=> {
+          return <div className="mx-1 my-1 cursor-pointer" key={index}>{item}</div>
         })
       }
     </div>
