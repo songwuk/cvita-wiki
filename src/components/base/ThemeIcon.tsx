@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react'
-import '@/styles/global.css'
 import { useState, useEffect } from 'react';
 // Mocking nextTick for the example
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -13,7 +12,6 @@ export default function ThemeIcon() {
       // @ts-expect-error
       document.startViewTransition &&
       !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     if (!isAppearanceTransition || !event) {
       return;
     }
@@ -32,15 +30,14 @@ export default function ThemeIcon() {
         `circle(0px at ${x}px ${y}px)`,
         `circle(${endRadius}px at ${x}px ${y}px)`,
       ]
-      console.log( theme !== 'light')
       document.documentElement.animate(
         {
-          clipPath: theme !== 'light' ? [...clipPath].reverse() : clipPath,
+          clipPath: theme === 'light' ? [...clipPath].reverse() : clipPath,
         },
         {
           duration: 400,
           easing: 'ease-in',
-          pseudoElement: theme !== 'light' 
+          pseudoElement: theme === 'light' 
             ? '::view-transition-old(root)'
             : '::view-transition-new(root)',
         }
