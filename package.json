@@ -4,7 +4,7 @@
   "description": "Consider on cv",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --host ",
+    "dev": "astro dev --host --port 4321",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

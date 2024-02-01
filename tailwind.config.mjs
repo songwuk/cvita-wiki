@@ -9,10 +9,10 @@ export default {
 		},
 		colors: {
 			// Using modern `rgb`
-			dark_playground: 'rgb(var(--set-base-dark-background-color) / 1)',
-			dark_color: 'rgb(var(--set-base-dark-color) / 1)',
-			light_playground: 'rgb(var(--set-base-light-background-color) / 1)',
-			light_color: 'rgb(var(--set-base-light-color) / 1)',
+			dark_playground: 'var(--set-base-dark-background-color)',
+			dark_color: 'var(--set-base-dark-color)',
+			light_playground: 'var(--set-base-light-background-color)',
+			light_color: 'var(--set-base-light-color)',
 		}
 	},
 	plugins: [],

@@ -2,7 +2,7 @@ import { useState, useRef} from 'react';
 import LeftContent from '../components/content/LeftContent.tsx'
 import RightContent from '../components/content/RightContent.tsx'
 import type { resumeType } from '@/type'
-
+import { createPageSize } from './context.ts'
 import './Mian.css';
 export default function Main() {
 	const [PageSize, setPageSize] = useState({
@@ -24,7 +24,9 @@ export default function Main() {
 	}
 	return (
 		<div ref={viewRef} className='font-MPLUSRounded1c flex justify-center flex-col items-start md:flex-row' onClickCapture={ ev => onMouseMoveMain(ev)}>
-			<LeftContent PageSize={PageSize} GetContent={(ev) => onGetContent(ev)}/>
+			<createPageSize.Provider value={PageSize}>
+				<LeftContent GetContent={(ev) => onGetContent(ev)}/>
+			</createPageSize.Provider>
 			<RightContent />
 		</div>
 	)

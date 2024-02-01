@@ -1,9 +1,12 @@
 import { Icon } from '@iconify/react'
-import { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 // Mocking nextTick for the example
+/**
+ * modify from https://mdn.github.io/dom-examples/view-transitions/#
+ */
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 0));
 export default function ThemeIcon() {
-  const [theme, setTheme] = useState<null | undefined | string>('null')
+  const [theme, setTheme] = useState<React.ReactNode>(null)
   const toggleTheme = async (event: React.MouseEvent<HTMLElement>) => {
     const t = theme === 'light' ? 'dark' : 'light'
     localStorage.setItem('theme',t)
@@ -56,7 +59,7 @@ export default function ThemeIcon() {
     }
     return 'light'
   }
-  useEffect(() => {
+  useLayoutEffect(() => {
     const themes = initTheme()
     setTheme(themes)
     const root = document && document.documentElement

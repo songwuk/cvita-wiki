@@ -1,16 +1,13 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import type { resumeType } from '@/type'
 import { myCaretRangeFromPoint } from '@/constants/index'
+import { createPageSize } from '../context.ts'
 import './LeftContent.css'
-/**
- * 空格 文字 特殊符号
- * @returns 
- */
 export default function LeftContent(
 {
-  PageSize,
   GetContent
-}: {PageSize: {pageX: number,pageY: number}, GetContent: (ev: resumeType) => void}){
+}: {GetContent: (ev: resumeType) => void}){
+  const PageSize = useContext(createPageSize);
   const inputedRef = useRef<HTMLTextAreaElement>(null)
   const [TextareaStyle, setTextareaStyle] = useState({
     left: '-100px',
@@ -82,36 +79,14 @@ export default function LeftContent(
     if (document?.caretRangeFromPoint) {  // standard (WebKit)
       // Use WebKit-proprietary fallback method
       range = document.caretRangeFromPoint(e.pageX, e.pageY);
-      textNode = range!.startContainer as Text | null;;
-      offset = range!.startOffset;
-    } else {
-      // 创建一个虚拟的range
-      range = document.createRange();
-      // 获取包含坐标的节点
-      var s = window.getSelection() as Selection;
-      const strongs = document.getElementsByClassName("view-line");
-      if (s.rangeCount > 0) s.removeAllRanges();
-      for (var i = 0; i < strongs.length; i++) {
-        var ranges = document.createRange();
-        ranges.selectNode(strongs[i]);
-        s.addRange(ranges);
-      } // O(N)
-      var node = document.elementFromPoint(e.pageX, e.pageY)!;
-      // const startOffset = 1
-      // const endOffset = 2
-      // range.setStart(node, startOffset ?? 1);
-      // range.setEnd(node, endOffset ?? 2);
-      //将光标定位到节点
-      range.selectNode(node);
       textNode = range!.startContainer as Text | null;
       offset = range!.startOffset;
-      console.log(range, 'range', node)
     }
     if (textNode && textNode.nodeType === 3) {
       let replacement = textNode?.splitText(offset || 0);
-      console.log(offset, replacement)
-      let br = document.createElement("br");
-      textNode.parentNode?.insertBefore(br, replacement);
+      // console.log(offset, replacement, textNode)
+      // let br = document.createElement("br");
+      // textNode.parentNode?.insertBefore(br, replacement);
     }
   }
   const onClickText = (event: React.MouseEvent<HTMLElement>) => {
@@ -149,18 +124,17 @@ export default function LeftContent(
     inputedRef.current?.focus() // FOCUS
     children[index]?.classList.add('view-line-hover')
   }
-  const itemsList = ['# 1.More Time', '## 2.更多时间', '### 3.没有时间'];
+  const itemsList = ['# 1.More Time', '## 2.更多时间', '### 3.没有时间', '### 4.计划'];
   return (
 		<>
-			<div className="border w-full border-black dark:border-white relative h-[909px]">
+			<div className="border w-full border-black dark:border-white relative h-[909px] opacity-[0.7]">
+        <span className='flex w-[30px] h-[30px] absolute right-0 top-0 opacity-[0.5]' style={{backgroundColor: 'gray',  borderBottomLeftRadius: '5px', textAlign: 'center'}}>.md</span>
         <div className='view-lines' onClick={ev => onClickText(ev)}>
           {
             itemsList.map((item, index) => {
               return (
                 <div key={index} className='view-line cursor-text'>
-                  <span>
-                    <span>{item}</span>
-                  </span>
+                  <span>{item}</span>
                 </div>
               )
             })

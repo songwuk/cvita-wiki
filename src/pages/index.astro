@@ -5,6 +5,8 @@ import LogoLine from '../components/base/LogoLine.astro'
 import Body from '../components/base/Body.astro'
 import Main from '../components/Main'
 import TabBar from '../components/TabBar'
+const isFirstLoading = false
+import FristLoading from '../components/base/FristLoading'
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
@@ -13,10 +15,15 @@ import TabBar from '../components/TabBar'
 		<BaseHead description='cv' title='resume'></BaseHead>
 	</head>
 	<Body>
-		<LogoLine></LogoLine>
-		<main>
-			<TabBar></TabBar>
-			<Main client:only="react"></Main>
-		</main>
+		{
+			isFirstLoading ? <FristLoading client:only="react"/> : 
+			<>
+				<LogoLine></LogoLine>
+				<main>
+					<TabBar></TabBar>
+					<Main client:only="react"></Main>
+				</main>
+			</>
+		}
 	</Body>
 </html>

@@ -13,6 +13,6 @@
   border: 1px solid transparent;
 }
 .view-line-hover {
-  border-top: 1px solid rgb(128, 128, 128,0.4);
-  border-bottom: 1px solid rgb(128, 128, 128,0.4);
+  border-top: 1px solid rgb(128, 128, 128,0.81);
+  border-bottom: 1px solid rgb(128, 128, 128,0.81);
 }
