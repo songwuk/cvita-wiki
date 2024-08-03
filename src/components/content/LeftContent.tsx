@@ -3,16 +3,22 @@ import type { resumeType } from '@/type'
 import { myCaretRangeFromPoint } from '@/constants/index'
 import { createPageSize } from '../context.ts'
 import './LeftContent.css'
+import { wh1, wh2, wh3, wh4, wh5, wh6} from '@/common.ts'
+// codePointAt
 export default function LeftContent(
 {
   GetContent
 }: {GetContent: (ev: resumeType) => void}){
   const PageSize = useContext(createPageSize);
   const inputedRef = useRef<HTMLTextAreaElement>(null)
-  const [TextareaStyle, setTextareaStyle] = useState({
-    left: '-100px',
-    top: '-100px',
-  })
+  const [TextareaStyle, setTextareaStyle] = useState(
+    () => {
+      return {
+        left: '-100px',
+        top: '-100px',
+      }
+    }
+  )
   const [postContent, setPostContent] = useState('');
 
   const addContext = (value: string) => {
@@ -115,12 +121,13 @@ export default function LeftContent(
        */
       const topPx = currentParentNode.offsetTop
       const leftPx = PageSize.pageX
-      insertBreakAtPoint(event)
+      // 加上当前的偏移位置
       setTextareaStyle({
         top: topPx + 'px',
         left: leftPx + 'px',
       })
     }
+    // insertBreakAtPoint(event)
     inputedRef.current?.focus() // FOCUS
     children[index]?.classList.add('view-line-hover')
   }
@@ -134,7 +141,14 @@ export default function LeftContent(
             itemsList.map((item, index) => {
               return (
                 <div key={index} className='view-line cursor-text'>
-                  <span>{item}</span>
+                  <span>
+                  {
+                    item.split('').map((n,i) => {
+                      // based on UTF-16 code units
+                      return (<span key={i}>{n}</span>)
+                    })
+                  }
+                  </span>
                 </div>
               )
             })
